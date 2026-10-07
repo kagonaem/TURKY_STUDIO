@@ -739,6 +739,19 @@
             overflow: hidden
         }
         
+        .map-box {
+            position: relative
+        }
+        
+        .map-open {
+            position: absolute;
+            bottom: 12px;
+            inset-inline-start: 12px;
+            z-index: 2;
+            padding: 10px 16px;
+            font-size: 13px
+        }
+        
         .map-box iframe {
             width: 100%;
             height: 100%;
@@ -1246,7 +1259,7 @@
             margin-top: 24px
         }
         
-         :focus-visible {
+        :focus-visible {
             outline: 2px solid var(--gold-deep);
             outline-offset: 2px
         }
@@ -1435,7 +1448,7 @@
                 <button type="button" class="tab-btn" id="tabFeedbackBtn" onclick="showTab('feedback')"><span data-ar>تقييم وملاحظات</span><span data-en>Feedback</span></button>
             </div>
 
-            <!-- WEB3FORMS: بدّل e828f6f7-3a2b-4ace-a875-763471be9b05 و e828f6f7-3a2b-4ace-a875-763471be9b05 بالمفاتيح اللي وصلتلك على الإيميل من https://web3forms.com -->
+            <!-- WEB3FORMS: مفاتيح الإرسال موجودة في الحقول المخفية access_key لكل فورم -->
 
             <div class="panel active" id="panelOrder">
                 <form class="form-grid" id="orderForm">
@@ -1446,7 +1459,7 @@
 
                     <div class="field">
                         <label for="o1"><span data-ar>الاسم بالكامل</span><span data-en>Full Name</span></label>
-                        <input id="o1" type="text" name="name" required placeholder="Ahmed Turky">
+                        <input id="o1" type="text" name="name" required placeholder="Mahmoud Turky">
                     </div>
                     <div class="field">
                         <label for="o2"><span data-ar>رقم الموبايل / الواتساب</span><span data-en>Phone / WhatsApp</span></label>
@@ -1573,7 +1586,6 @@
 
     <script>
         // ============ CONFIG ============
-        var MAP_SRC = 'https://maps.app.goo.gl/ZBqLb5RJXoUFwSCR9'; // الصق هنا رابط src الخاص بـ Google Maps Embed
 
         var grads = ['#8f6d33,#1f4b49', '#1f4b49,#121214', '#c69a56,#8f6d33', '#3a3a3d,#c69a56', '#1f4b49,#c69a56', '#121214,#8f6d33'];
 
@@ -1849,9 +1861,10 @@
         }
 
         // ============ MAP ============
-        if (MAP_SRC) {
-            document.getElementById('mapBox').innerHTML = '<iframe src="' + esc(MAP_SRC) + '" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" title="Map"></iframe>';
-        }
+        var MAP_LINK = 'https://maps.app.goo.gl/ZBqLb5RJXoUFwSCR9'; // رابط المشاركة (بيفتح جوجل ماب)
+        var MAP_SRC = 'https://www.google.com/maps?q=' + encodeURIComponent('عمارة بانوراما، شارع الرشيدية، المحمودية، البحيرة') + '&output=embed';
+        var mapBtn = '<a class="btn btn-primary map-open" href="' + esc(MAP_LINK) + '" target="_blank" rel="noopener"><span data-ar>افتح على خرائط جوجل</span><span data-en>Open in Google Maps</span></a>';
+        document.getElementById('mapBox').innerHTML = '<iframe src="' + esc(MAP_SRC) + '" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" title="Map"></iframe>' + mapBtn;
 
         // ============ CLIENTS ============
         function clientHTML(c, i) {
